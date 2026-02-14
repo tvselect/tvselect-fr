@@ -359,6 +359,9 @@ if not os.path.exists(netrc_path):
 with open(f"/home/{user}/.netrc", "r") as file:
     lines = file.read().splitlines()
 
+username_tvselect = username_tvselect.strip()
+password_tvselect = password_tvselect.strip()
+
 try:
     position = lines.index("machine www.tv-select.fr")
     lines[position + 1] = f"  login {username_tvselect}"
