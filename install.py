@@ -71,19 +71,15 @@ def get_gpg_keys():
 
     return keys
 
-
 home_dir = os.path.expanduser("~")
-cmd = ["ls", home_dir]
-ls_home = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-ls_directory = "videos_select" if "videos_select\n" in ls_home.stdout else ""
+directory_path = os.path.join(home_dir, "videos_select")
 
-if ls_directory == "":
-    directory_path = os.path.join(home_dir, "videos_select")
-    process = subprocess.run(["mkdir", "-p", directory_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if process.returncode != 0:
-        print(f" Error creating directory: {process.stderr.decode()}")
-    else:
+if not os.path.isdir(directory_path):
+    try:
+        os.makedirs(directory_path, mode=0o755)
         print("Le dossier videos_select a été créé dans votre dossier home.\n")
+    except OSError as e:
+        print(f"Error creating directory: {e}")
 
 permission_mode = 0o700
 
