@@ -21,8 +21,13 @@ fi
 get_time_from_config() {
     if [[ -f "$CONFIG_PY_FILE" ]]; then
         # Extract the hour and minute values from the Python config file
-        CURL_HOUR=$(grep -oP 'CURL_HOUR\s*=\s*\K\d+' "$CONFIG_PY_FILE")
-        CURL_MINUTE=$(grep -oP 'CURL_MINUTE\s*=\s*\K\d+' "$CONFIG_PY_FILE")
+        CURL_HOUR=$(grep -oP 'CURL_HOUR\s*=\s*\K\d+' "$CONFIG_PY_FILE" || true)
+        CURL_MINUTE=$(grep -oP 'CURL_MINUTE\s*=\s*\K\d+' "$CONFIG_PY_FILE" || true)
+
+        if [[ -z "$CURL_HOUR" || -z "$CURL_MINUTE" ]]; then
+            echo "Error: Invalid or missing CURL_HOUR/CURL_MINUTE in config." >> "$LOG_FILE"
+            exit 1
+        fi
 
         # Ensure we have two digits for hour and minute
         CURL_HOUR=$(printf "%02d" $CURL_HOUR)
