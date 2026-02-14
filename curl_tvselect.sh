@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 SERVICE="tv-select"
 PYTHON="$HOME/.local/share/tvselect-fr/.venv/bin/python"
 

@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -euo pipefail
 
 LOG_FILE="$HOME/.local/share/tvselect-fr/logs/cron_curl.log"
 OUTPUT_FILE="$HOME/.local/share/tvselect-fr/info_progs.json"
