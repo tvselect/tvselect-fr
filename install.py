@@ -496,15 +496,15 @@ if hdmi_screen == "oui" or hdmi_screen == "no_se":
     cron_lines = [curl if "tvselect-fr/curl_tvselect.sh" in cron else cron for cron in cron_lines]
 else:
     cron_lines = [cron for cron in cron_lines if "tvselect-fr/curl_tvselect.sh" not in cron]
-cron_lines = [cron_launch if "tvselect-fr &&" in cron else cron for cron in cron_lines]
+cron_lines = [cron_launch if "/tvselect-fr &&" in cron else cron for cron in cron_lines]
 
 if auto_update.lower() == "oui":
     cron_lines = [
-        cron_auto_update if "tvselect-fr/auto_update" in cron else cron
+        cron_auto_update if "/tvselect-fr/auto_update" in cron else cron
         for cron in cron_lines
     ]
 else:
-    cron_lines = [cron for cron in cron_lines if "tvselect-fr/auto_update" not in cron]
+    cron_lines = [cron for cron in cron_lines if "/tvselect-fr/auto_update" not in cron]
 
 
 cron_lines_join = "".join(cron_lines)
@@ -514,7 +514,7 @@ if (hdmi_screen == "oui" or hdmi_screen == "no_se") and "tvselect-fr/curl_tvsele
 if "cd /home/$USER/tvselect-fr &&" not in cron_lines_join:
     cron_lines.append(cron_launch)
 
-if auto_update.lower() == "oui" and "tvselect-fr/auto_update" not in cron_lines_join:
+if auto_update.lower() == "oui" and "/tvselect-fr/auto_update" not in cron_lines_join:
     cron_lines.append(cron_auto_update)
 
 with open(
