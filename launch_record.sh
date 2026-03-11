@@ -21,7 +21,7 @@ jq -c '.[]' "$JSON_FILE" | while read -r row; do
     [[ "$start" =~ ^[0-9:[:space:]+-]+$ ]] || continue
 
     at "$start" <<EOF
-dvbv5-zap -t "$duration" -o "$title" -c "$CHANNELS_CONF" "$channel" >> "$LOG_FILE" 2>&1
+flock -n /tmp/dvbv5-zap.lock dvbv5-zap -t "$duration" -o "$title" -c "$CHANNELS_CONF" "$channel" >> "$LOG_FILE" 2>&1 || echo "\$(date): dvbv5-zap already running, skipping '$title'" >> "$LOG_FILE"
 EOF
 
 done
