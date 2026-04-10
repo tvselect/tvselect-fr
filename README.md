@@ -1,4 +1,4 @@
-# 📺 tvselect-fr v3.0.0
+# 📺 tvselect-fr v4.0.0
 
 > 🔍 Turn TV into a discovery engine
 > 📼 Automatically record TNT programs based on your interests
@@ -111,14 +111,14 @@ Accessible from:
 ### Install
 
 ```bash id="install1"
-sudo apt update && sudo apt install jq v4l-utils dvb-tools dtv-scan-tables at curl virtualenv
+sudo apt update && sudo apt install jq dvb-apps w-scan at curl virtualenv seahorse
 ```
 
 ```bash id="install2"
 cd ~
-curl -L -o tvselect-fr.zip https://github.com/tvselect/tvselect-fr/archive/refs/tags/v3.0.0.zip
+curl -L -o tvselect-fr.zip https://github.com/tvselect/tvselect-fr/archive/refs/tags/v4.0.0.zip
 unzip tvselect-fr.zip
-mv tvselect-fr-3.0.0 tvselect-fr
+mv tvselect-fr-4.0.0 tvselect-fr
 ```
 
 ---
@@ -126,7 +126,9 @@ mv tvselect-fr-3.0.0 tvselect-fr
 ### Channel scan
 
 ```bash id="scan"
-dvbv5-scan /usr/share/dvb/dvb-t/fr-All -o ~/.local/share/tvselect-fr/channels.conf
+mkdir ~/.tzap
+w_scan -f t -c FR -X -t 3 > ~/.tzap/channels.conf
+sed -i -e 's/(.*)//g' ~/.tzap/channels.conf
 ```
 
 ---
