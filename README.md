@@ -3,7 +3,7 @@
 > 🔍 Turn TV into a discovery engine
 > 📼 Automatically record TNT programs based on your interests
 
-<!-- ![Demo](docs/demo.gif) -->
+![Demo](docs/demo-tvselect-fr.gif)
 
 ---
 
@@ -111,7 +111,7 @@ Accessible from:
 ### Install
 
 ```bash id="install1"
-sudo apt update && sudo apt install jq dvb-apps w-scan at curl virtualenv seahorse
+sudo apt update && sudo apt install jq dvb-apps w-scan at curl virtualenv
 ```
 
 ```bash id="install2"
